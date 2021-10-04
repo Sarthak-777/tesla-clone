@@ -16,8 +16,6 @@ function Navbar() {
   const handlePropsLeave = () => {
     setValue(!value);
   };
-  console.log(value);
-  console.log(navTitle);
   return (
     <Nav>
       <LogoContainer>
@@ -78,7 +76,7 @@ const LogoContainer = styled.div`
   align-items: center;
   color: white;
   img {
-    height: 16px;
+    height: 14px;
     object-fit: contain;
     position: relative;
     top: 2px;
@@ -87,7 +85,7 @@ const LogoContainer = styled.div`
   h2 {
     margin-left: 30px;
     font-weight: 550;
-    font-size: 20px;
+    font-size: 16px;
     text-transform: uppercase;
     color: inherit;
   }
@@ -99,7 +97,7 @@ const MiddleContainer = styled.div`
   color: white;
   h2 {
     font-weight: 550;
-    font-size: 20px;
+    font-size: 16px;
     color: inherit;
     padding: 10px;
     text-transform: uppercase;
@@ -115,13 +113,13 @@ const RightContainer = styled.div`
   fill: white;
   h2 {
     font-weight: 550;
-    font-size: 20px;
+    font-size: 16px;
     color: inherit;
     text-transform: uppercase;
   }
   > .MuiSvgIcon-root {
     fill: inherit;
-    font-size: 26px;
+    font-size: 22px;
   }
 `;
 
@@ -159,7 +157,7 @@ const Nav = styled.div`
 
 const HoverContainer = styled.div`
   position: absolute;
-  top: 63px;
+  top: 58px;
   max-height: 70vh;
   min-height: 20vh;
   width: 100%;
@@ -180,7 +178,7 @@ const First = styled.div`
   > h2 {
     margin-left: 12px;
     font-family: monospace;
-    font-size: 24px;
+    font-size: 18px;
     width: 100%;
     text-align: start;
     border-bottom: 10px solid #d0d1d2;
@@ -205,12 +203,12 @@ const Img = styled.div`
   align-items: center;
   justify-content: center;
   > img {
-    width: 600px;
+    width: 540px;
     object-fit: contain;
   }
   h2 {
     font-family: inherit;
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 40px;
   }
 `;
@@ -219,6 +217,6 @@ const List = styled.li`
   font-family: monospace;
   list-style: none;
   margin: 15px;
-  font-size: 21px;
+  font-size: 14px;
   text-align: start;
 `;

@@ -1,41 +1,95 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { bannerContents } from "../bannerContents";
 import "./Banner.css";
+import Arrow from "./Arrow";
 
 function Banner() {
-  console.log(bannerContents);
+  const [state, setState] = useState({
+    translate: 0,
+    transition: 0.45,
+    activeIndex: 0,
+    hiddenRight: false,
+    hiddenLeft: true,
+  });
+  const { translate, transition, activeIndex, hiddenRight, hiddenLeft } = state;
+  const slideWidth = window.innerWidth;
+  console.log(state);
+  const handleNextSlide = () => {
+    if (activeIndex === bannerContents.length - 1) {
+      return setState({
+        ...state,
+        translate: 0,
+        activeIndex: 0,
+      });
+    }
+    setState({
+      ...state,
+      translate: slideWidth,
+      activeIndex: activeIndex + 1,
+      hiddenRight: true,
+      hiddenLeft: false,
+    });
+  };
+  const handlePrevSlide = () => {
+    if (activeIndex === 0) {
+      return setState({
+        ...state,
+      });
+    }
+    setState({
+      ...state,
+      translate: 0,
+      activeIndex: 0,
+      hiddenLeft: true,
+      hiddenRight: false,
+    });
+  };
+
   return (
-    <BannerContainer>
-      {bannerContents.map((content) => {
-        return (
-          <ImageContent>
-            <Image
-              key={content.id}
-              src={content.src}
-              alt={content.name}
-            ></Image>
-            <Content>
-              <h1>{content.name}</h1>
-              <p>{content.description}</p>
-            </Content>
-          </ImageContent>
-        );
-      })}
-    </BannerContainer>
+    <BannerMain>
+      <BannerContainer translate={translate}>
+        {bannerContents.map((content) => {
+          return (
+            <ImageContent>
+              <Image
+                key={content.id}
+                src={content.src}
+                alt={content.name}
+              ></Image>
+              <Content>
+                <h1>{content.name}</h1>
+                <p>{content.description}</p>
+              </Content>
+            </ImageContent>
+          );
+        })}
+      </BannerContainer>
+      <Arrow
+        direction="right"
+        handleClick={handleNextSlide}
+        hidden={hiddenRight}
+      />
+      <Arrow
+        direction="left"
+        handleClick={handlePrevSlide}
+        hidden={hiddenLeft}
+      />
+    </BannerMain>
   );
 }
 
 export default Banner;
 
-const BannerContainer = styled.div`
+const BannerMain = styled.div`
   position: relative;
+`;
+
+const BannerContainer = styled.div`
   display: flex;
-  overflow-x: scroll;
   max-height: 90vh;
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  transition: all 0.4s ease-out;
+  transform: translate(-${(props) => props.translate}px);
 `;
 
 const ImageContent = styled.div`
@@ -48,6 +102,7 @@ const Image = styled.img`
   object-fit: cover;
   width: 100vw;
   position: relative;
+  background-repeat: no-repeat;
 `;
 
 const Content = styled.div`
@@ -59,13 +114,13 @@ const Content = styled.div`
     color: #fff;
     text-transform: uppercase;
     padding: 10px;
-    font-size: 26px;
+    font-size: 21px;
     font-weight: 800;
     font-family: monospace;
   }
   p {
     color: #fff;
-    font-size: 35px;
+    font-size: 28px;
     font-weight: 600;
     padding: 10px;
     font-family: monospace;
